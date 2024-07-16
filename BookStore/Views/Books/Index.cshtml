@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Book>
+
+<h2>Books Index Page</h2>
+
+<p> List of Books in our Library</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            @*Table Headers*@
+
+            <td>Id</td>
+            <td>Title</td>
+            <td>Author</td>
+            <td>Description</td>
+            <td>Language</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td> <a asp-controller="Books" asp-action="Details" asp-route-id="@item.Id">@item.Title</a></td>
+                <td>@item.Author</td>
+                <td>@item.Description</td>
+                <td>@item.Language</td>
+                @* asp-route-"parameter name" *@
+                <td><a asp-controller="Books" asp-action="Details" asp-route-id="@item.Id">Details</a></td>
+
+                @* Implement Delete*@
+                <td><a asp-controller="Books" asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+                @* Implement update *@
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+
+@*Add New Book Button new method using Tag Helpers*@
+<a class="btn btn-primary" asp-controller="Books" asp-action="Create">Add New Book</a>
+
+@if (@TempData["Success"] != null)
+{
+    <div id="successMessage" style="float:right">
+        <div class="alert alert-success alert-dismissible">
+            <strong>@TempData["Success"]</strong>
+        </div>
+    </div>
+
+}

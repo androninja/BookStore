@@ -1,0 +1,30 @@
+﻿<h1>@ViewBag.Title</h1>
+
+<p>@ViewData["message"]</p>
+
+
+<hr />
+<div>
+    <span>List of Cities i've visited recently using ViewData</span>
+    <ul>
+        @{
+            var list = ViewData["cities"] as List<string>;
+            @foreach(var city in list)
+            {
+                <li>@city</li>
+            }
+        }
+    </ul>
+</div>
+
+<div>
+    <span>List of Cities i've visited recently using ViewBag</span>
+    <ul>
+        @{
+            @foreach(var city in ViewBag.Cities)
+            {
+                <li>@city</li>
+            }
+        }
+    </ul>
+</div>

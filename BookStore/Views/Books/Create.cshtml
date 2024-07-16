@@ -1,0 +1,47 @@
+﻿@using BookStore.Models;
+@model BookStore.Models.Book;
+@inject IBookRepository bookRepository;
+
+<h2>New Book</h2>
+
+<form asp-controller ="Books" asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Title" class="control-label"></label>
+        <input asp-for="Title" class="form-control"/>
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Author" class="control-label"></label>
+        <input asp-for="Author" class="form-control" />
+        <span asp-validation-for="Author" class="text-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="Language" class="control-label"></label>
+        <select asp-for="Language" class="form-control" 
+            asp-items="Html.GetEnumSelectList<Language>()">
+                <option value ="">Select Language</option>
+        </select>
+        <span asp-validation-for="Language" class="text-danger"></span>
+
+    </div>
+
+
+    <div class="form-group">
+        <br />
+        
+        <button type="submit" class="btn btn-primary">Add Book</button>
+    </div>
+    <div>
+        @* //can we call the getAll() method inside this view? - Inject the object directly inside the view*@
+        <p>Total number of Books:@bookRepository.GetAll().Count()</p>
+    </div>
+</form>
